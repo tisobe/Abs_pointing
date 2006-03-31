@@ -1,0 +1,4 @@
+source /home/mta/.ascrc
+
+perl /data/mta/MTA/bin/abs_pointing_main.perl
+
