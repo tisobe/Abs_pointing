@@ -32,7 +32,7 @@ $data_dir = $list[3];
 #--- this will be used in simbad_query.perl
 #
 
-system("cp $data_dir/Query_mta.pm .");
+system("cp $data_dir/Abs_pointing/Query_mta.pm .");
 
 #
 #--- set email user name who will get email when coordinates are not obtained
