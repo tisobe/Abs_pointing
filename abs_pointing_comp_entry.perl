@@ -29,14 +29,15 @@ while(<FH>){
 	push(@list, $_);
 }
 close(FH);
-$bin_dir = $list[0];
-$web_dir = $list[1];
+$bin_dir       = $list[0];
+$web_dir       = $list[1];
 $house_keeping = $list[2];
+$data_dir      = $list[3];
 
 #
 #---- read name of constellations, abbriviated, and full names
 #
-open(FH, "$house_keeping/constellation");
+open(FH, "$data_dir/Abs_pointing/constellation");
 @constellation = ();
 while(<FH>){
 	chomp $_;
@@ -44,7 +45,7 @@ while(<FH>){
 }
 close(FH);
 #
-open(FH, "$house_keeping/constellation2");
+open(FH, "$data_dir/Abs_pointing/constellation2");
 @constellation2 = ();
 while(<FH>){
 	chomp $_;

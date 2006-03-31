@@ -10,7 +10,7 @@
 #		         the observation will be drop from the further analysis		#
 #											#
 #	author: t. isobe (tisobe@cfa.harvard.edu)					#
-#	last update:	Mar. 21, 2004							#
+#	last update:	Mar. 31, 2004							#
 #											#
 #	needed file: constellation: a list of the name of constellations in 3 letters	#
 #		     coord_list:    a list of objects with known coordinates		#
@@ -28,14 +28,15 @@ while(<FH>){
         push(@list, $_);
 }
 close(FH);
-$bin_dir = $list[0];
-$web_dir = $list[1];
+$bin_dir       = $list[0];
+$web_dir       = $list[1];
 $house_keeping = $list[2];
+$data_dir      = $list[3];
 
 #
 #---- read name of constellations
 #
-open(FH, "$house_keeping/constellation");
+open(FH, "$data_dir/Abs_pointing/constellation");
 @constellation = ();
 while(<FH>){
 	chomp $_;

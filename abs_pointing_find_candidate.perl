@@ -27,6 +27,7 @@ close(FH);
 $bin_dir = $list[0];
 $web_dir = $list[1];
 $house_keeping = $list[2];
+$data_dir =$list[3];
 
 
 #
@@ -47,7 +48,7 @@ close(FH);
 #--- name of constellations
 #
 
-open(FH, "$house_keeping/constellation");
+open(FH, "$data_dir/Abs_pointing/constellation");
 @constellation = ();
 while(<FH>){
         chomp $_;

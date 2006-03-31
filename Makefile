@@ -7,7 +7,7 @@ include /data/mta/MTA/include/Makefile.MTA
 
 BIN  = abs_pointing_acis_plot.perl abs_pointing_comp_entry.perl abs_pointing_comp_second_time.perl abs_pointing_compute_pos_diff.perl abs_pointing_extract_obsid.perl abs_pointing_find_candidate.perl abs_pointing_get_coord_from_simbad.perl abs_pointing_hrci_plot.perl abs_pointing_hrcs_plot.perl abs_pointing_main.perl abs_pointing_print_html.perl abs_pointing_run_script abs_pointing_simbad_query.perl abs_pointing_wrap_script
 DOC  = README
-DATA = Query_mta.pm
+DATA = Query_mta.pm constellation constellation2
 
 install:
 ifdef BIN
