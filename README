@@ -77,9 +77,10 @@ abs_pointing_comp_entry.perl
 		./candidate_list 
 
 	extra files needed:
-		in $house_keeping/:
+		in $data_dir/Abs_pointing/:
 		constellation --- a list of names of constellations in 3 letters
 		constellation2--- a list of names of constellations fully spelled out
+		in $house_keeping/:
 		coord_list    --- a previously observed object list and their coordinates
 		obsid_list    --- a list of the past observations checked
 
@@ -148,8 +149,8 @@ abs_pointing_comp_second_time.perl
 
 	Input: 
 		./dir_list
-		$hosue_keeping/constellation
-	       	$house_keeping/coord_list
+		$data_dir/Abs_pointing/constellation
+	       	$data_dir/Abs_pointing/coord_list
 	       	./check_coord --- format: name<t>obsid<t>inst<t>grat
 
         output: known_coord
@@ -252,11 +253,15 @@ abs_pointing_print_html.perl
 directories/files
 ##################
 
+$data_dir/Abs_pointing
+----------------------
+	Query_mta.pm:		SYMBAD query module used by perl (modified for MTA need)
+	constellation:		three letter constellation names
+	constellation2:		fully spelled constellation names
+
 $hosue_keeping
 --------------
 
-	constellation:		three letter constellation names
-	constellation2:		fully spelled constellation names
 	coord_list:		coordinates of previously checked objects
 	obsid_list:		a list of previously checked obsids
 	unknown_coordiate	a list of unknown coordinate objects
