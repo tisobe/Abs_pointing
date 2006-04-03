@@ -170,7 +170,7 @@ close(OUT);
 #
 #--- print out targets which we could not identify the coordinates
 #
-open(OUT, ">./unknown_coordinate");
+open(OUT, ">$house_keeping/unknown_coordinate");
 $chk = 0;
 OUTER:
 for($i = 0; $i < $total; $i++){

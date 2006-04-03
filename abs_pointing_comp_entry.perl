@@ -329,6 +329,8 @@ foreach $ent (@check_list){
 #
 open(OUT4, '>./simbad_list');
 foreach $ent (@new){
-	print OUT4 "$ent\n";
+	if($ent =~ /\w/){
+		print OUT4 "$ent\n";
+	}
 }
 close(OUT4);

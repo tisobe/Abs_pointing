@@ -56,7 +56,7 @@ foreach $ent (@obsid_list){
 
 @obsid_list = sort{$a<=>$b} @new;
 
-open(OUT, ">>$house_keeping/obsid_list");
+open(OUT, ">$house_keeping/obsid_list");
 foreach $ent (@obsid_list){
 	print OUT "$ent\n";
 }
