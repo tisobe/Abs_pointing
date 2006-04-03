@@ -114,7 +114,7 @@ abs_pointing_get_coord_from_simbad.perl
 		./unknown_coordiate		a list of targets which we could not identify
 
 	Script:	abs_pointing_simbad_query.perl
-			---- this must run witl /usr/local/bin/perl5.8.6
+			---- this must run with /usr/local/bin/perl5.8.6
 
 	Email:	if ./unkonwn_coordinate contains target names, send out email to $user
 
@@ -273,7 +273,18 @@ Temporary files created in a working directory
 	known_coord ---  list of objects with known coordinates
 	check_coord ---- list of objects with unknown coordinates
 
-$web_dir/Data
+
+$web_dir/
+----------
+the data display web area. all data from ./Data are copied to here
+	http://asc.harvard.edu/mta_days/mta_aiming/aiming_page.html
+
+	aiming_page.html   --- a html page for this project
+	acis_s_plot.html   --- a html page for acis s
+	hrc_i_plot.html    --- a html page for hrc i
+	hrc_s_plot.html    --- a html page for hrc s
+
+$web_dir/Data/
 --------------
 
 	acis_s_data	---- acis s data file
@@ -282,15 +293,9 @@ $web_dir/Data
 	format: <DOM> <obsid> <target name> <RA> <DEC> <RA difference> <DEC difference>
 					      in deg		in arc sec
 
-/data/mta/www/mta_aiming
-------------------------
-the data display web area. all data from ./Data are copied to here
-	http://asc.harvard.edu/mta_days/mta_aiming/aiming_page.html
+$web_dir/Fig_save/
+------------------
 
 	acis_point_err.gif --- a plot for acis_s_data
 	hrc_i_point_err.gif--- a plot for hrc_i_data
 	hrc_s_point_err.gif--- a plot for hrc_s_data
-	aiming_page.html   --- a html page for this project
-	acis_s_plot.html   --- a html page for acis s
-	hrc_i_plot.html    --- a html page for hrc i
-	hrc_s_plot.html    --- a html page for hrc s
