@@ -59,17 +59,11 @@ foreach  $obj (@objects){
 	$ds = $ctemp[2];
 	$dec = "$dd:$dm:$ds";
 #
-#---- this is a very cude way to get proper motion values, but it works...
+#----  find proper motion values
 #	
-       	@pm = $obj->pm();
-       	$d = Dumper(\@pm);
-       	@temp = split(/\s+/, $d);
-       	$temp[4] =~ s/\'//g;
-       	$temp[4] =~ s/\,//g;
-       	$temp[5] =~ s/\'//g;
-       	$temp[5] =~ s/\,//g;
+       	$pm = $obj->pm();
 	
-	$line = "$ra\t$dec\t$temp[4]\t$temp[5]";
+	$line = "$ra\t$dec\t$$pm[0]\t$$pm[1]";
 	open(OUT, '>./simbad_out');
 	print OUT "$line\n";
 	close(OUT);
