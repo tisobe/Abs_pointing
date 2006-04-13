@@ -8,8 +8,8 @@ cronjob
 
 These scripts are run as cronjobs on colossus:
 
-0 5 1 * * cd /data/mta/Script/ALIGNMENT/Abs_pointing/Exc; abs_pointing_wrap_script > $HOME/Logs/position_aiming.cron 2>&1
-0 5 15 * * cd /data/mta/Script/ALIGNMENT/Abs_pointing/Exc; abs_pointing_wrap_script > $HOME/Logs/position_aiming.cron 2>&1
+0 5 1 * * cd /data/mta/Script/ALIGNMENT/Abs_pointing/Exc; /data/mta/MTA/bin/abs_pointing_wrap_script > $HOME/Logs/position_aiming.cron 2>&1
+0 5 15 * * cd /data/mta/Script/ALIGNMENT/Abs_pointing/Exc; /data/mta/MTA/bin/abs_pointing_wrap_script > $HOME/Logs/position_aiming.cron 2>&1
 
 
 ############################

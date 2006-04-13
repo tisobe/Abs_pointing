@@ -156,7 +156,7 @@ for($k = 0; $k < $tot; $k++){
 #
 #---- here is the arc4gl 
 #
-	system("echo $hakama |arc4gl -U$dare -Sarcocc -i./input_line"); 
+	system("echo $hakama |/home/ascds/DS.release/bin/arc4gl -U$dare -Sarcocc -i./input_line"); 
 	system("rm ./input_line");
 	
 	@ztemp = split(/-/, $inst_list[$k]);

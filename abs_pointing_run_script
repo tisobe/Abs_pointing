@@ -1,4 +1,4 @@
-source /home/mta/.ascrc
+setascds
 
 perl /data/mta/MTA/bin/abs_pointing_main.perl
 
