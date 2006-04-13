@@ -289,22 +289,22 @@ sub find_coord{
 #---- select a window acoording to the instrument
 #
 	if($inst =~ /ACIS/i){
-        	system("dmcopy \"./$fits_file\[bin x=3500:4900:1,y=3650:5100:1\]\" ./temp_img.fits");
+        	system("/home/ascds/DS.release/bin/dmcopy \"./$fits_file\[bin x=3500:4900:1,y=3650:5100:1\]\" ./temp_img.fits");
 	}elsif($inst =~ /HRC-I/i){
-		system("dmcopy \"./$fits_file\[bin x=16000:17000:1,y=16000:17000:1\]\" ./temp_img.fits");
+		system("/home/ascds/DS.release/bin/dmcopy \"./$fits_file\[bin x=16000:17000:1,y=16000:17000:1\]\" ./temp_img.fits");
 	}elsif($inst =~ /HRC-S/i){
-		system("dmcopy \"./$fits_file\[bin x=32500:33500:1,y=32500:33500:1\]\" ./temp_img.fits");
+		system("/home/ascds/DS.release/bin/dmcopy \"./$fits_file\[bin x=32500:33500:1,y=32500:33500:1\]\" ./temp_img.fits");
 	}
 
 #
 #---- use celldetect to find source locations in the file
 #
 #	system("celldetect ./temp_img.fits  ./out.fits clobber=yes");
-	system("wavdetect ./temp_img.fits  ./out.fits ./cell.fits ./t_img.fits ./bkg.fits expfile=none  clobber=yes");
+	system("/home/ascds/DS.release/bin/wavdetect ./temp_img.fits  ./out.fits ./cell.fits ./t_img.fits ./bkg.fits expfile=none  clobber=yes");
 #
 #---- geta few information we need
 #	
-	system(" dmlist \"out.fits\" opt=head > zout");
+	system(" /home/ascds/DS.release/bin/dmlist \"out.fits\" opt=head > zout");
 	open(FH, './zout');
 	while(<FH>){
 		chomp $_;
@@ -335,7 +335,7 @@ sub find_coord{
 #
 #---- assuming the brightest source is the source we wanted, find which one is the source
 #
-	system("dmlist \"out.fits[cols net_counts,ra,dec]\" opt=data > zout");
+	system("/home/ascds/DS.release/bin/dmlist \"out.fits[cols net_counts,ra,dec]\" opt=data > zout");
 	open(FH, './zout');
 	@net_cnt = ();
 	$atot    = 0;
