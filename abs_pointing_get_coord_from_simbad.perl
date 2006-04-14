@@ -7,7 +7,7 @@
 #										#
 #	author:	t. isobe (tisobe@cfa.harvard.edu)				#
 #										#
-#	last update: 03/31/2006							#
+#	last update: 04/14/2006							#
 #										#
 #################################################################################
 
@@ -22,10 +22,10 @@ while(<FH>){
         push(@list, $_);
 }
 close(FH);
-$bin_dir = $list[0];
-$web_dir = $list[1];
+$bin_dir       = $list[0];
+$web_dir       = $list[1];
 $house_keeping = $list[2];
-$data_dir = $list[3];
+$data_dir      = $list[3];
 
 #
 #--- copy Query_mta.pm to working directory
@@ -85,6 +85,8 @@ foreach $target (@target_list){
 #--- information. it must be run with /usr/local/bin/perl5.8.6.
 #
 	system("/usr/local/bin/perl5.8.6 $bin_dir/abs_pointing_simbad_query.perl");
+	$sim_data = '';
+	@ctemp    = ();
 	$sim_data = `cat simbad_out`;
 	@ctemp = split(/\t+/, $sim_data);
 #
@@ -94,8 +96,15 @@ foreach $target (@target_list){
 	$dec   = '99:99:99.999';
 	$pmra  = '0.0';
 	$pmdec = '0.0';
-	if($ctemp[0] =~ /\d/ && $ctemp[1] =~ /\d/){
-		$ra = $ctemp[0];
+
+	if($sim_data eq ''){
+#
+#--- if simbad failed to give coordinate information, keep the target name
+#--- in check_list.
+#
+		push(@check_list, $target);
+	}elsif($ctemp[0] =~ /\d/ && $ctemp[1] =~ /\d/){
+		$ra  = $ctemp[0];
 		$dec = $ctemp[1];
 		if($ctemp[2] =~ /\d/ && $ctemp[3] =~ /\d/){
 			$pmra  = $ctemp[2];
@@ -104,10 +113,6 @@ foreach $target (@target_list){
 			chomp $pmdec;
 		}
 	}else{
-#
-#--- if simbad failed to give coordinate information, keep the target name
-#--- in check_list.
-#
 		push(@check_list, $target);
 	}
 
@@ -160,7 +165,7 @@ open(OUT, '>>./known_coord');
 OUTER:
 for($i = 0; $i < $total; $i++){
 	foreach $ent (@results){
-		if($ent =~ /$targets[$i]/i){
+		if($ent =~ /$targets[$i]/i && $targets[$i] ne ''){
 			print OUT "$obsid[$i]\t$inst[$i]\t$grat[$i]\t$ent\n";
 			next OUTER;
 		}
@@ -170,7 +175,7 @@ close(OUT);
 #
 #--- print out targets which we could not identify the coordinates
 #
-open(OUT, ">$house_keeping/unknown_coordinate");
+open(OUT, ">./unknown_coordinate");
 $chk = 0;
 OUTER:
 for($i = 0; $i < $total; $i++){
@@ -182,14 +187,15 @@ for($i = 0; $i < $total; $i++){
 		}
 	}
 }
+close(OUT);
 
 #
-#--- sending email to $usere so that he can check unchecked target manually
+#--- sending email to $user so that he can check unchecked target manually
 #
 if($chk > 0){
-	system("cat ./unknown_coordniate |mailx -s \"Subject: Aiming Point Monitoring: Unchecked coodinates\n\" -r  $user\@head-cfa.harvard.edu   $user\@head-cfa.harvard.edu");
+	system("cat ./unknown_coordinate | mailx -s \"Subject: Aiming Point Monitoring: Unchecked coodinates\" -r  mta\@head.cfa.harvard.edu   $user\@head.cfa.harvard.edu");
 
-	system("cat ./unknown_coordniate >> $house_keeping/unknown_coordiate");
+	system("cat ./unknown_coordinate >> $house_keeping/unknown_coordinate");
 }
-system("rm ./unknown_coordiate Query_mta.pm");
+system("rm ./unknown_coordinate Query_mta.pm");
 
