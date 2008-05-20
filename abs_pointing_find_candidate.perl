@@ -1,5 +1,5 @@
-#!/usr/bin/perl
-BEGIN { $ENV{'SYBASE'} = "/soft/sybase"; }
+#!/proj/DS.ots/perl-5.10.0.SunOS5.8/bin/perl
+BEGIN { $ENV{'SYBASE'} = "/soft/SYBASE_OCS15"; }
 use DBI;
 use DBD::Sybase;
 
@@ -10,7 +10,7 @@ use DBD::Sybase;
 #				name, grating name.				#
 #										#
 #	author: t. isobe (tisobe@cfa.harvard.edu)				#
-#	last update: Mar 31, 2006						#
+#	last update: May 20, 2008						#
 #										#
 #################################################################################
 
