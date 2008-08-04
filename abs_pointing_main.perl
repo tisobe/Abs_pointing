@@ -6,7 +6,7 @@
 #										#
 #	author: t. isobe (tisobe@cfa.harvard.edu)				#
 #										#
-#	last update: Mar 31, 2006						#
+#	last update: Aug 04, 2008						#
 #										#
 #################################################################################
 
@@ -37,7 +37,7 @@ print OUT "$house_keeping\n";
 print OUT "$data_dir\n";
 close(OUT);
 
-system("perl $bin_dir/abs_pointing_find_candidate.perl");
+system("/proj/DS.ots/perl-5.10.0.SunOS5.8/bin/perl  $bin_dir/abs_pointing_find_candidate.perl");
 system("perl $bin_dir/abs_pointing_comp_entry.perl");
 system("perl $bin_dir/abs_pointing_get_coord_from_simbad.perl $user");
 ####system("perl $bin_dir/abs_pointing_comp_second_time.perl");
