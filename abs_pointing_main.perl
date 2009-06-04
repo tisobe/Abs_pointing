@@ -6,7 +6,7 @@
 #										#
 #	author: t. isobe (tisobe@cfa.harvard.edu)				#
 #										#
-#	last update: Aug 04, 2008						#
+#	last update: Jun 04, 2009						#
 #										#
 #################################################################################
 
@@ -38,15 +38,15 @@ print OUT "$data_dir\n";
 close(OUT);
 
 system("/proj/DS.ots/perl-5.10.0.SunOS5.8/bin/perl  $bin_dir/abs_pointing_find_candidate.perl");
-system("perl $bin_dir/abs_pointing_comp_entry.perl");
-system("perl $bin_dir/abs_pointing_get_coord_from_simbad.perl $user");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_comp_entry.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_get_coord_from_simbad.perl $user");
 ####system("perl $bin_dir/abs_pointing_comp_second_time.perl");
-system("perl $bin_dir/abs_pointing_extract_obsid.perl");
-system("perl $bin_dir/abs_pointing_compute_pos_diff.perl");
-system("perl $bin_dir/abs_pointing_acis_plot.perl");
-system("perl $bin_dir/abs_pointing_hrci_plot.perl");
-system("perl $bin_dir/abs_pointing_hrcs_plot.perl");
-system("perl $bin_dir/abs_pointing_print_html.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_extract_obsid.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_compute_pos_diff.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_acis_plot.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_hrci_plot.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_hrcs_plot.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_print_html.perl");
 
 
 system("rm candidate_list check_coord dir_list known_coord new_obsid_list simbad_list");
