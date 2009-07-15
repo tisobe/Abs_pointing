@@ -6,7 +6,7 @@ use PGPLOT;
 #       hrcs_plot.perl: plottting hrc s  data                                   #
 #                                                                               #
 #       author: t. isobe (tiosbe@cfa.harvard.edu)                               #
-#       last update Mar 22, 2006                                                #
+#       last update Jul 15, 2009                                                #
 #                                                                               #
 #################################################################################
 
@@ -90,7 +90,7 @@ plot_fig();
 
 pgend;
 
-system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  pgplot.ps| $bin_dir/pnmflip -r270 | $bin_dir/ppmtogif > $web_dir/Fig_save/hrc_s_point_err.gif");
+system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  pgplot.ps| $bin_dir/pnmflip -r270 | $bin_dir/ppmtogif > $web_dir/Fig_save/hrc_s_point_err.gif");
 system("rm pgplot.ps");
 
 

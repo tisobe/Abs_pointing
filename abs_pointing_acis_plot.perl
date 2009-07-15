@@ -6,7 +6,7 @@ use PGPLOT;
 #	acis_plot.perl: plottting acis s data					#
 #										#
 #	author: t. isobe (tiosbe@cfa.harvard.edu)				#
-#	last update Mar 22, 2006						#
+#	last update Jul 15, 2009						#
 #										#
 #################################################################################
 
@@ -89,7 +89,7 @@ plot_fig();
 
 pgclos();
 
-system("echo ''|gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  pgplot.ps| $bin_dir/pnmflip -r270 | $bin_dir/ppmtogif > $web_dir/Fig_save/acis_point_err.gif");
+system("echo ''|/opt/local/bin/gs -sDEVICE=ppmraw  -r256x256 -q -NOPAUSE -sOutputFile=-  pgplot.ps| $bin_dir/pnmflip -r270 | $bin_dir/ppmtogif > $web_dir/Fig_save/acis_point_err.gif");
 system("rm pgplot.ps");
 
 ########################################################
