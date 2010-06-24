@@ -8,6 +8,7 @@
 #										#
 #	Sep 20, 2000:	First version						#
 #	Mar 22, 2006:	a new directory system					#
+#	Jun 24, 2010:   format updated						#
 #										#
 #################################################################################
 
@@ -58,172 +59,86 @@ if ($uyear == 1999) {
 
 open(OUT, ">$web_dir/aiming_page.html");
 
-print OUT '<HTML>';
+print OUT "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"> \n";
+print OUT " \n";
+print OUT "<html> \n";
+print OUT "<head> \n";
+print OUT "        <link rel=\"stylesheet\" type=\"text/css\" href=\"http://asc.harvard.edu/mta/REPORTS/Template/mta.css\" /> \n";
+print OUT "        <title>Celestial Location Monitoring</title> \n";
+print OUT " \n";
+print OUT "        <script language=\"JavaScript\"> \n";
+print OUT "                function WindowOpener(imgname) { \n";
+print OUT "                        msgWindow = open(\"\",\"displayname\",\"toolbar=no,directories=no,menubar=no,location=no,scrollbars=no,status=no,width=820,height=620,resize=no\"); \n";
+print OUT "                        msgWindow.document.clear(); \n";
+print OUT "                        msgWindow.document.write(\"<html><title>Trend plot:   \"+imgname+\"</title>\"); \n";
+print OUT "                        msgWindow.document.write(\"<body bgcolor='white'>\"); \n";
+print OUT "                        msgWindow.document.write(\"<img src='./Fig_save/\"+imgname+\"' border=0 width=800 height=600 ><p></p></body></html>\") \n";
+print OUT "                        msgWindow.document.close(); \n";
+print OUT "                        msgWindow.focus(); \n";
+print OUT "                } \n";
+print OUT "        </script> \n";
+print OUT " \n";
+print OUT "</head> \n";
+print OUT "<body  style='background-image:url(\"./stars.jpg\")'> \n";
 
-print OUT '<BODY TEXT="#FFFFFF" BGCOLOR="#000000" LINK="#00CCFF" VLINK="#B6FFFF" ALINK="#FF0000", background="./stars.jpg">',"\n";
 
-print OUT '<title> Celestial Location Monitoring</title>',"\n";
 
-print OUT '<CENTER><H2>ACIS-S and HRC Celestial Location Monitoring </H2> </CENTER>',"\n";
+print OUT '<h2  style="text-align:center;padding-bottom:10px">ACIS-S and HRC Celestial Location Monitoring </h2>',"\n";
 
-#print OUT '<CENTER><H1>Updated ';
-#print OUT "$uyear-$month-$umday  ";
-#print OUT "\n";
-#print OUT "<br>";
-#print OUT "DAY OF YEAR: $uyday ";
-#print OUT "\n";
-#print OUT "<br>";
-#print OUT "DAY OF MISSION: $dom ";
-#print OUT '</H1></CENTER>';
-#print OUT "\n";
-print OUT '<P>';
-print OUT "\n";
-print OUT '<HR>';
-print OUT '<H3> PLOTS </H3>',"\n";
-print OUT '<P>',"\n";
+print OUT '<hr />',"\n";
+print OUT '<h3> PLOTS </h3>',"\n";
+print OUT '<p>',"\n";
 print OUT 'The following plots are the differences between coordinates obtained';
 print OUT ' from Chandra observations and those obtained from existing catalogs';
 print OUT ' vs time in day of mission.',"\n";
-print OUT '</P>',"\n";
-print OUT '<P>',"\n";
+print OUT '</p>',"\n";
+print OUT '<p>',"\n";
 print OUT 'The following steps are taken to generate these plots',"\n";
-print OUT '</P>',"\n";
-print OUT '<P>',"\n";
-print OUT '<ul>',"\n";
-print OUT '<li> All observations with grating are selected from a recent observation list';
+print OUT '</p>',"\n";
+print OUT "<br /> \n";
+print OUT '<p>',"\n";
+print OUT '<ul style="color:#90EE90">',"\n";
+print OUT '<li style="line-height:120%"> All observations with grating are selected from a recent observation list';
 print OUT 'None grating observations with known point sources (e.g., previously observed objects)';
-print OUT 'are also added to the list.';
-print OUT '<br>',"\n";
-print OUT '<li> Find coordinates for each observation from SIMBAD. If the coordinates information is ';
+print OUT 'are also added to the list.<br /></li>';
+print OUT "<br /> \n";
+print OUT '<li style="line-height:120%"> Find coordinates for each observation from SIMBAD. If the coordinates information is ';
 print OUT 'given at three decimal accuracy, we use the observation. Otherwise';
 print OUT ' it is dropped from the further process. ';
-print OUT 'These coordinates are converted into detector coordinates';
-print OUT '<br>',"\n";
-print OUT '<li> Using a cell detect function, find source positions in detector coordinates.';
-print OUT '<br>',"\n";
-print OUT '<li> Assuming the brightest object is the targeted source (this is true most of';
+print OUT 'These coordinates are converted into detector coordinates.<br /></li>';
+print OUT "<br /> \n";
+print OUT '<li style="line-height:120%"> Using a cell detect function, find source positions in detector coordinates.<br /></li>';
+print OUT "<br /> \n";
+print OUT '<li style="line-height:120%"> Assuming the br /ightest object is the targeted source (this is true most of';
 print OUT ' the time, because all observations are grating observations),';
-print OUT ' compare those to the coordinates from the SIMBAD';
-print OUT '<br>',"\n";
-print OUT '<li> Convert the differences into arc sec, and plot the results';
+print OUT ' compare those to the coordinates from the SIMBAD.<br /></li>';
+print OUT "<br /> \n";
+print OUT '<li style="line-height:120%"> Convert the differences into arc sec, and plot the results.</li>';
 print OUT '</ul>',"\n";
-print OUT '</P>',"\n";
+print OUT '</p>',"\n";
 
 
-print OUT '<A HREF=./acis_s_plot.html> ACIS S Plot</A>',"\n";
-print OUT '<br>',"\n";
-print OUT '<A HREF=./hrc_s_plot.html> HRC S Plot</A>',"\n";
-print OUT '<br>',"\n";
-print OUT '<A HREF=./hrc_i_plot.html> HRC I Plot</A>',"\n";
-print OUT '<br>',"\n";
+print OUT "<table border=0 cellpadding=5 cellspacing=4 style='padding-left:40px'> \n";
+print OUT '<tr><th width=30%> Click to See the Plot </th><th width=30%>Data (ASCII)</th></tr>',"\n";
+print OUT "<tr><td><a href=\"javascript:WindowOpener('acis_point_err.gif')\"> ACIS S Plot</a></td> \n";
+print OUT '<td><a href=./Data/acis_s_data target="_blank" >ACIS S Data</a></td>',"\n";
+print OUT '</tr>',"\n";
+print OUT "<tr><td><a href=\"javascript:WindowOpener('hrc_s_point_err.gif')\"> HRC S Plot</a></td> \n";
+print OUT '<td><a href=./Data/hrc_s_data target="_blank">HRC S Data</a></td>',"\n";
+print OUT '</tr>',"\n";
+print OUT "<tr><td><a href=\"javascript:WindowOpener('hrc_i_point_err.gif')\"> HRC I  Plot</a></td> \n";
+print OUT '<td><a href=./Data/hrc_i_data target="_blank">HRC I Data</a></td>',"\n";
+print OUT '</tr>',"\n";
+print OUT '</table>',"\n";
 
-print OUT '<hr>',"\n";
-
-print OUT '<H3> DATA Plotted (ASCII format) </H3>',"\n";
-print OUT '<A HREF=./Data/acis_s_data>ACIS S Data</A>',"\n";
-print OUT '<br>',"\n";
-print OUT '<A HREF=./Data/hrc_s_data>HRC S Data</A>',"\n";
-print OUT '<br>',"\n";
-print OUT '<A HREF=./Data/hrc_i_data>HRC I Data</A>',"\n";
-print OUT '<br>',"\n";
-
-print OUT '<hr>',"\n";
-print OUT '<A HREF=http://icxc.harvard.edu/cal/drift/drift4.html>';
+print OUT '<hr />',"\n";
+print OUT "<h3 >Memo</h3>\n";
+print OUT "<p style='padding-bottom:40px'> \n";
+print OUT '<a href=http://icxc.harvard.edu/cal/drift/drift4.html>';
 print OUT 'Maxim Markevitch (maxim@head-cfa.harvard.edu) Study (password required)';
-print OUT '</A>';
-print OUT '<br>',"\n";
-print OUT '<A HREF=http://asc.harvard.edu/mta/sot.html>Back to SOT page</A>';
-print OUT '<br><br>',"\n";
-print OUT "Last Update: $uyear-$month-$umday\n";
+print OUT '</a>',"\n";
+print OUT "</p> \n";
+print OUT '<hr />',"\n";
+print OUT '<a href=http://asc.harvard.edu/mta/sot.html>Back to SOT page</a>';
+print OUT "<div style='float:right;padding-left:100px'>Last Update: $uyear-$month-$umday</div>\n";
 close(OUT);
-
-####### printing an acis plot html page   ########
-
-open(OUT,">$web_dir/acis_s_plot.html");
-
-print OUT '<HTML>';
-
-print OUT '<BODY TEXT="#FFFFFF" BGCOLOR="#000000" LINK="#00CCFF" VLINK="#B6FFFF" ALINK="#FF0000">',"\n";
-
-print OUT '<title> ACIS-S Aiming Plot</title>',"\n";
-
-print OUT '<CENTER><H2>ACIS-S Cooridnate Accuracy</H2> </CENTER>',"\n";
-
-print OUT "\n";
-print OUT '<P>';
-print OUT "\n";
-
-print OUT '<HR>',"\n";
-
-print OUT '<center>',"\n";
-print OUT '<IMG SRC="./Fig_save/acis_point_err.gif" width=800 height=800>',"\n";
-print OUT '</center>',"\n";
-print OUT '<br><br>',"\n";
-print OUT '<a href=./aiming_page.html>Back to Top page</a>',"\n";
-print OUT '<br><br>',"\n";
-print OUT "Last Update: $uyear-$month-$umday\n";
-
-
-close(OUT);
-
-
-###### printing a hrc s plot html page   ########
-
-open(OUT,">$web_dir/hrc_s_plot.html");
-
-print OUT '<HTML>';
-
-print OUT '<BODY TEXT="#FFFFFF" BGCOLOR="#000000" LINK="#00CCFF" VLINK="#B6FFFF" ALINK="#FF0000">',"\n";
-
-print OUT '<title> HRC-S Aiming Plot</title>',"\n";
-
-print OUT '<CENTER><H2>HRC-S Cooridnate Accuracy</H2> </CENTER>',"\n";
-
-print OUT "\n";
-print OUT '<P>';
-print OUT "\n";
-
-print OUT '<HR>',"\n";
-
-print OUT '<center>',"\n";
-print OUT '<IMG SRC="./Fig_save/hrc_s_point_err.gif" width=800 height=800>',"\n";
-print OUT '</center>',"\n";
-print OUT '<br><br>',"\n";
-print OUT '<a href=./aiming_page.html>Back to Top page</a>',"\n";
-print OUT '<br><br>',"\n";
-print OUT "Last Update: $uyear-$month-$umday\n";
-
-close(OUT);
-
-
-
-##### printing a hrc i plot html page    #########
-
-open(OUT,">$web_dir/hrc_i_plot.html");
-
-print OUT '<HTML>';
-
-print OUT '<BODY TEXT="#FFFFFF" BGCOLOR="#000000" LINK="#00CCFF" VLINK="#B6FFFF" ALINK="#FF0000">',"\n";
-
-print OUT '<title> HRC-I Aiming Plot</title>',"\n";
-
-print OUT '<CENTER><H2>HRC-I Cooridnate Accuracy</H2> </CENTER>',"\n";
-
-print OUT "\n";
-print OUT '<P>';
-print OUT "\n";
-
-print OUT '<HR>',"\n";
-
-print OUT '<center>',"\n";
-print OUT '<IMG SRC="./Fig_save/hrc_i_point_err.gif" width=800 height=800>',"\n";
-print OUT '</center>',"\n";
-print OUT '<br><br>',"\n";
-print OUT '<a href=./aiming_page.html>Back to Top page</a>',"\n";
-print OUT '<br><br>',"\n";
-print OUT "Last Update: $uyear-$month-$umday\n";
-
-
-close(OUT);
-
-
