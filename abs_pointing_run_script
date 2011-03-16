@@ -10,3 +10,10 @@ set path = (/home/ascds/DS.release/ots/bin/ $path)
 
 perl /data/mta/MTA/bin/abs_pointing_main.perl
 
+rm /data/mta/Script/ALIGNMENT/Abs_pointing/Exc/*
+
+chgrp mtagroup /data/mta/Script/ALIGNMENT/Abs_pointing/Data/*
+chgrp mtagroup /data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/*
+chgrp mtagroup /data/mta_www/mta_aiming/*.html 
+chgrp mtagroup /data/mta_www/mta_aiming/Fig_save/* 
+

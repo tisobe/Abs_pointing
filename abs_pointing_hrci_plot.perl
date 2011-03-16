@@ -6,26 +6,32 @@ use PGPLOT;
 #       hrci_plot.perl: plottting hrc i  data                                   #
 #                                                                               #
 #       author: t. isobe (tiosbe@cfa.harvard.edu)                               #
-#       last update Jul 15, 2009                                                #
+#       last update Mar 16, 2011                                                #
 #                                                                               #
 #################################################################################
 
+###################################################################
 #
-#--- read directory list
+#---- setting directories
 #
-open(FH, './dir_list');
-@list = ();
+
+open(FH, "/data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/dir_list");
+@atemp = ();
 while(<FH>){
         chomp $_;
-        push(@list, $_);
+        push(@atemp, $_);
 }
 close(FH);
-$bin_dir = $list[0];
-$web_dir = $list[1];
-$house_keeping = $list[2];
 
+$bin_dir       = $atemp[0];
+$bdata_dir     = $atemp[1];
+$web_dir       = $atemp[2];
+$data_dir      = $atemp[3];
+$house_keeping = $atemp[4];
 
-open(FH, "$web_dir/Data/hrc_i_data");
+###################################################################
+
+open(FH, "$data_dir/hrc_i_data");
 @time_save = ();
 @y_diff = ();
 @z_diff = ();

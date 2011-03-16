@@ -7,32 +7,37 @@
 #										#
 #	author:	t. isobe (tisobe@cfa.harvard.edu)				#
 #										#
-#	last update: 04/14/2006							#
+#	last update: Mar 16, 2011						#
 #										#
 #################################################################################
 
+###################################################################
 #
-#--- read directory list
+#---- setting directories
 #
 
-open(FH, './dir_list');
-@list = ();
+open(FH, "/data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/dir_list");
+@atemp = ();
 while(<FH>){
         chomp $_;
-        push(@list, $_);
+        push(@atemp, $_);
 }
 close(FH);
-$bin_dir       = $list[0];
-$web_dir       = $list[1];
-$house_keeping = $list[2];
-$data_dir      = $list[3];
+
+$bin_dir       = $atemp[0];
+$bdata_dir     = $atemp[1];
+$web_dir       = $atemp[2];
+$data_dir      = $atemp[3];
+$house_keeping = $atemp[4];
+
+###################################################################
 
 #
 #--- copy Query_mta.pm to working directory
 #--- this will be used in simbad_query.perl
 #
 
-system("cp $data_dir/Abs_pointing/Query_mta.pm .");
+system("cp $bdata_dir/Abs_pointing/Query_mta.pm .");
 
 #
 #--- set email user name who will get email when coordinates are not obtained

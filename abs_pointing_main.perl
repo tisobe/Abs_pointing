@@ -6,7 +6,7 @@
 #										#
 #	author: t. isobe (tisobe@cfa.harvard.edu)				#
 #										#
-#	last update: Apr 26, 2010						#
+#	last update: Mar 16, 2011						#
 #										#
 #################################################################################
 
@@ -14,33 +14,37 @@
 #
 #---- setting directories
 #
-$bin_dir       = '/data/mta/MTA/bin/';
-$web_dir       = '/data/mta/www/mta_aiming/';
-$house_keeping = '/data/mta/www/mta_aiming/house_keeping/';
-$data_dir      = '/data/mta/MTA/data/';
+
+open(FH, "/data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/dir_list");
+@atemp = ();
+while(<FH>){
+        chomp $_;
+        push(@atemp, $_);
+}
+close(FH);
+
+$bin_dir       = $atemp[0];
+$bdata_dir     = $atemp[1];
+$web_dir       = $atemp[2];
+$data_dir      = $atemp[3];
+$house_keeping = $atemp[4];
 
 #
 #---- and others
 #
-$user          = 'isobe';
+open(FH, "$bdata_dir/.dare");
+@inline =<FH>;
+close(FH);
+$dare = $inline[0];
+$dare =~ s/\s+//;
 
 ###################################################################
 
-#
-#--- create a directory file so that other scripts can read it
-#
-
-open(OUT, '>./dir_list');
-print OUT "$bin_dir\n";
-print OUT "$web_dir\n";
-print OUT "$house_keeping\n";
-print OUT "$data_dir\n";
-close(OUT);
 
 system("/soft/ascds/DS.release/ots/bin/perl  $bin_dir/abs_pointing_find_candidate.perl");
+
 system("/opt/local/bin/perl $bin_dir/abs_pointing_comp_entry.perl");
-system("/opt/local/bin/perl $bin_dir/abs_pointing_get_coord_from_simbad.perl $user");
-####system("perl $bin_dir/abs_pointing_comp_second_time.perl");
+system("/opt/local/bin/perl $bin_dir/abs_pointing_get_coord_from_simbad.perl $dare");
 system("/opt/local/bin/perl $bin_dir/abs_pointing_extract_obsid.perl");
 system("/opt/local/bin/perl $bin_dir/abs_pointing_compute_pos_diff.perl");
 system("/opt/local/bin/perl $bin_dir/abs_pointing_acis_plot.perl");

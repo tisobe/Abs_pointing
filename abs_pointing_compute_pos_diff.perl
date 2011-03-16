@@ -7,43 +7,45 @@
 #			      between the position and those from SYMBAD	#
 #										#
 #	author: T. Isobe (tisobue@cfa.harvard.edu)				#
-#	last update: Mar 30 2006						#
+#	last update: Mar 16 2011						#
 #                 modified to fit a new directory system			#
 #		  added input data (known_coord) check				#
 #										#
 #################################################################################
 
+###################################################################
 #
-#--- read directory list
+#---- setting directories
 #
-open(FH, './dir_list');
-@list = ();
+
+open(FH, "/data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/dir_list");
+@atemp = ();
 while(<FH>){
         chomp $_;
-        push(@list, $_);
-}
-close(FH);
-$bin_dir       = $list[0];
-$web_dir       = $list[1];
-$house_keeping = $list[2];
-$data_dir      = $list[3];
-
-#
-#---- get a few pieces of necessary information
-#
-open(FH, "$data_dir/.dare");
-while(<FH>){
-	chomp $_;
-	$dare = $_;
+        push(@atemp, $_);
 }
 close(FH);
 
-open(FH, "$data_dir/.hakama");
-while(<FH>){
-	chomp $_;
-	$hakama = $_;
-}
+$bin_dir       = $atemp[0];
+$bdata_dir     = $atemp[1];
+$web_dir       = $atemp[2];
+$data_dir      = $atemp[3];
+$house_keeping = $atemp[4];
+
+#
+#---- and others
+#
+open(FH, "$bdata_dir/.dare");
+@inline =<FH>;
 close(FH);
+$dare = $inline[0];
+$dare =~ s/\s+//;
+
+open(FH, "$bdata_dir/.hakama");
+@inline =<FH>;
+close(FH);
+$hakama = $inline[0];
+$hakama =~ s/\s+//;
 
 #
 #--- add un analyzed data from the last run
@@ -204,13 +206,13 @@ for($k = 0; $k < $tot; $k++){
 #--- open output file according to the instrument
 #
 	if($inst_list[$k] =~ /ACIS-S/i){
-		open(OUT, ">>$web_dir/Data/acis_s_data");
+		open(OUT, ">>$data_dir/acis_s_data");
 	}elsif($inst_list[$k] =~ /ACIS-I/i){
-		open(OUT, ">>$web_dir/Data/acis_i_data");
+		open(OUT, ">>$data_dir/acis_i_data");
 	}elsif($inst_list[$k] =~ /HRC-S/i){
-		open(OUT, ">>$web_dir/Data/hrc_s_data");
+		open(OUT, ">>$data_dir/hrc_s_data");
 	}elsif($inst_list[$k] =~ /HRC-I/i){
-		open(OUT, ">>$web_dir/Data/hrc_i_data");
+		open(OUT, ">>$data_dir/hrc_i_data");
 	}
 	@ctemp = split(//, $obsid_list[$k]);
 	$tcnt  = 0;
@@ -251,7 +253,7 @@ foreach $r_file ('acis_s_data', 'acis_i_data', 'hrc_s_data', 'hrc_i_data'){
 #---- if the coordinates are 0.0000, the script could not find a soruce,
 #---- and hence we move it into a rejected_list
 #
-	open(FH, "$web_dir/Data/$r_file");
+	open(FH, "$data_dir/$r_file");
 	@temp = ();
 	while(<FH>){
 		chomp $_;
@@ -259,8 +261,8 @@ foreach $r_file ('acis_s_data', 'acis_i_data', 'hrc_s_data', 'hrc_i_data'){
 	}
 	close(FH);
 	@new = sort{$a<=>$b} @temp;
-	open(OUT, "> $web_dir/Data/$r_file");
-	open(OUT2, ">> $web_dir/Data/rejected_list");
+	open(OUT, "> $data_dir/$r_file");
+	open(OUT2, ">> $data_dir/rejected_list");
 	foreach $ent (@new){
 		@atemp = split(/\t/, $ent);
 		$first = abs ($atemp[5]);
@@ -300,7 +302,7 @@ sub find_coord{
 #---- use celldetect to find source locations in the file
 #
 #	system("celldetect ./temp_img.fits  ./out.fits clobber=yes");
-	system("/home/ascds/DS.release/bin/wavdetect ./temp_img.fits  ./out.fits ./cell.fits ./t_img.fits ./bkg.fits expfile=none  clobber=yes");
+	system("/home/ascds/DS.release/bin/wavdetect ./temp_img.fits  ./out.fits ./cell.fits ./t_img.fits ./bkg.fits expfile=none scale='2 4'  clobber=yes");
 #
 #---- geta few information we need
 #	

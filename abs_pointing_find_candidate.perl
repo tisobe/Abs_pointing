@@ -10,25 +10,29 @@ use DBD::Sybase;
 #				name, grating name.				#
 #										#
 #	author: t. isobe (tisobe@cfa.harvard.edu)				#
-#	last update: Apr 26, 2010						#
+#	last update: Mar 16, 2011						#
 #										#
 #################################################################################
 
+############################################################################
 #
 #--- read directory list
 #
-open(FH, './dir_list');
-@list = ();
+open(FH, "/data/mta/Script/ALIGNMENT/Abs_pointing/house_keeping/dir_list");
+@atemp = ();
 while(<FH>){
         chomp $_;
-        push(@list, $_);
+        push(@atemp, $_);
 }
 close(FH);
-$bin_dir = $list[0];
-$web_dir = $list[1];
-$house_keeping = $list[2];
-$data_dir =$list[3];
 
+$bin_dir       = $atemp[0];
+$bdata_dir     = $atemp[1];
+$web_dir       = $atemp[2];
+$data_dir      = $atemp[3];
+$house_keeping = $atemp[4];
+
+############################################################################
 
 #
 #---- a previously examined obsid list
@@ -48,7 +52,7 @@ close(FH);
 #--- name of constellations
 #
 
-open(FH, "$data_dir/Abs_pointing/constellation");
+open(FH, "$bdata_dir/Abs_pointing/constellation");
 @constellation = ();
 while(<FH>){
         chomp $_;
